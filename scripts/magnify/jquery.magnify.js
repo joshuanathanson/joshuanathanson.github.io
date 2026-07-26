@@ -319,9 +319,7 @@ jQuery.fn.magnify = function( options ) {
 			this.realwidth =  parseInt(this.node.style.width) 
 								+ parseInt(this.node.style.borderLeftWidth)
 								+ parseInt(this.node.style.borderRightWidth);
-			var st = jQuery.browser.safari 
-						? document.body.scrollTop
-						: document.documentElement.scrollTop;
+			var st = document.documentElement.scrollTop;
 			var screenbottom = document.documentElement.clientHeight + st;
 			this.node.style.top = smallimagedata.pos.top + this.realheight > screenbottom 
 									? screenbottom - this.realheight - 10 + 'px'
