@@ -1,28 +1,79 @@
+<!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <title>Josh Nathanson | Portfolio</title>
         <style>
             body {
                 margin: 0;
-                padding: 48px 20px;
+                padding: 48px 20px 64px;
                 font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 background: #f8fafc;
                 color: #0f172a;
             }
 
+            .page-shell {
+                max-width: 980px;
+                margin: 0 auto;
+            }
+
+            .hero {
+                margin-bottom: 28px;
+                padding: 24px 0 8px;
+            }
+
+            .eyebrow {
+                margin: 0 0 8px;
+                font-size: 0.8rem;
+                font-weight: 700;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: #64748b;
+            }
+
             h1 {
-                max-width: 900px;
-                margin: 0 auto 24px;
+                margin: 0 0 12px;
                 font-size: 2.25rem;
                 font-weight: 700;
                 color: #0f172a;
             }
 
-            section {
+            .lead {
+                margin: 0 0 16px;
+                max-width: 720px;
+                font-size: 1.04rem;
+                line-height: 1.8;
+                color: #475569;
+            }
+
+            .meta-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .meta-pill {
+                display: inline-block;
+                padding: 7px 11px;
+                border: 1px solid #e2e8f0;
+                border-radius: 999px;
+                background: #f8fafc;
+                color: #475569;
+                font-size: 0.9rem;
+                font-weight: 500;
+            }
+
+            .card-link {
+                display: block;
+                color: inherit;
+                text-decoration: none;
+            }
+
+            .project-card {
                 display: flex;
                 align-items: flex-start;
                 gap: 24px;
-                max-width: 900px;
-                margin: 0 auto 20px;
+                margin: 0 0 18px;
                 padding: 24px 28px;
                 background: #ffffff;
                 border: 1px solid #e2e8f0;
@@ -30,12 +81,13 @@
                 transition: border-color 0.2s ease, background-color 0.2s ease;
             }
 
-            section:hover {
+            .card-link:hover .project-card,
+            .card-link:focus-visible .project-card {
                 background: #f8fafc;
                 border-color: #cbd5e1;
             }
 
-            section h2 {
+            .project-card h2 {
                 flex: 0 0 180px;
                 margin: 0;
                 font-size: 1.2rem;
@@ -43,45 +95,88 @@
                 color: #0f172a;
             }
 
-            section h2 a {
-                color: inherit;
-                text-decoration: none;
-                border-bottom: 1px solid transparent;
-                transition: border-color 0.2s ease;
-            }
-
-            section h2 a:hover {
-                border-color: #93c5fd;
-            }
-
-            section p {
+            .card-body {
                 flex: 1;
-                margin: 0;
+            }
+
+            .card-body p {
+                margin: 0 0 12px;
                 line-height: 1.75;
                 color: #475569;
             }
 
+            .highlights {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .highlights li {
+                padding: 6px 10px;
+                border-radius: 999px;
+                border: 1px solid #e2e8f0;
+                background: #f8fafc;
+                color: #475569;
+                font-size: 0.9rem;
+            }
+
             @media (max-width: 700px) {
-                section {
+                .project-card {
                     flex-direction: column;
                     gap: 12px;
                 }
 
-                section h2 {
+                .project-card h2 {
                     flex-basis: auto;
                 }
             }
         </style>
     </head>
     <body>
-        <h1>Josh Nathanson: Portfolio</h1>
-        <section>
-            <h2><a href="magnify.html">Magnify</a></h2>
-            <p>A simple image magnification plugin for jQuery. Bind a link and thumbnail image for rollover magnification effect. Configurable options for lens size, loading behavior, plus before/after loading hooks.</p>
-        </section>
-        <section>
-            <h2><a href="clockpick.html">ClockPick</a></h2>
-            <p>A simple time picker plugin for jQuery. Bind an input field to select a time. Features keyboard navigation, minutes toggle, configurable minute divisions.</p>
-        </section>
+        <div class="page-shell">
+            <header class="hero">
+                <p class="eyebrow">jQuery plugin demos</p>
+                <h1>Josh Nathanson</h1>
+                <p class="lead">
+                    Featuring lightweight interactive tools for the web, documented with polished demos so their behavior is easy to explore.
+                </p>
+                <div class="meta-row">
+                    <span class="meta-pill">2 featured plugins</span>
+                    <span class="meta-pill">Interactive examples</span>
+                    <span class="meta-pill">Open for reuse</span>
+                </div>
+            </header>
+
+            <a class="card-link" href="magnify.html">
+                <section class="project-card">
+                    <h2>Magnify</h2>
+                    <div class="card-body">
+                        <p>An image magnification plugin for jQuery with rollover zoom behavior, configurable lens sizing, and live demo examples.</p>
+                        <ul class="highlights">
+                            <li>Hover zoom</li>
+                            <li>Lens controls</li>
+                            <li>Config demos</li>
+                        </ul>
+                    </div>
+                </section>
+            </a>
+
+            <a class="card-link" href="clockpick.html">
+                <section class="project-card">
+                    <h2>ClockPick</h2>
+                    <div class="card-body">
+                        <p>A time picker plugin for jQuery that lets users choose times through a compact interactive popup with configurable layout and range options.</p>
+                        <ul class="highlights">
+                            <li>Time selection</li>
+                            <li>Custom ranges</li>
+                            <li>24-hour mode</li>
+                        </ul>
+                    </div>
+                </section>
+            </a>
+        </div>
     </body>
 </html>
