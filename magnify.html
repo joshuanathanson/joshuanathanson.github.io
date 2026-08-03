@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>jQuery Magnify Demos</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="scripts/magnify/jquery.magnify.js"></script>
+        <link rel="stylesheet" href="styles/demo-page.css">
+    </head>
+    <body>
+        <div class="page-wrapper">
+            <a href="index.html" class="nav-link">&larr; Back to index</a>
+        </div>
+        <div class="page-wrapper">
+            <h1>jQuery Magnify Demo</h1>
+            <p class="intro">
+                This page documents the configurable options exposed by the plugin and demonstrates several ways to tailor its behavior.
+            </p>
+
+            <table class="options-table">
+            <thead>
+                <tr>
+                    <th>Option</th>
+                    <th>Type</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>lensWidth</td><td>int</td><td><code>100</code></td><td>Width of the magnifying lens in pixels.</td></tr>
+                <tr><td>lensHeight</td><td>int</td><td><code>100</code></td><td>Height of the magnifying lens in pixels.</td></tr>
+                <tr><td>showEvent</td><td>string</td><td><code>mouseover</code></td><td>Event used to display the large image.</td></tr>
+                <tr><td>hideEvent</td><td>string</td><td><code>mouseout</code></td><td>Event used to hide the large image.</td></tr>
+                <tr><td>stagePlacement</td><td>string</td><td><code>right</code></td><td>Places the zoom stage to the right or left of the thumbnail.</td></tr>
+                <tr><td>preload</td><td>boolean</td><td><code>true</code></td><td>Preloads the large image before showing the zoom stage.</td></tr>
+                <tr><td>loadingImage</td><td>string</td><td><code>''</code></td><td>Path to a loading image or spinner.</td></tr>
+                <tr><td>stageCss</td><td>object</td><td><code>{}</code></td><td>Additional styles applied to the zoom stage.</td></tr>
+                <tr><td>lensCss</td><td>object</td><td><code>{}</code></td><td>Additional styles applied to the magnifying lens.</td></tr>
+                <tr><td>onBeforeShow</td><td>function</td><td><code>function() {}</code></td><td>Called immediately before the zoom is shown.</td></tr>
+                <tr><td>onAfterShow</td><td>function</td><td><code>function() {}</code></td><td>Called immediately after the zoom is shown.</td></tr>
+                <tr><td>onBeforeHide</td><td>function</td><td><code>function() {}</code></td><td>Called immediately before the zoom is hidden.</td></tr>
+                <tr><td>onAfterHide</td><td>function</td><td><code>function() {}</code></td><td>Called immediately after the zoom is hidden.</td></tr>
+            </tbody>
+        </table>
+
+        <div class="demo">
+            <h2>Default behavior</h2>
+            <p>No options are passed. This uses the plugin defaults.</p>
+            <div class="demo-layout">
+                <div class="demo-preview">
+                    <a href="images/lambo.jpg" id="lambo-link">
+                        <img src="images/lambo-sm.jpg" id="lambo-sm" alt="Lamborghini thumbnail">
+                    </a>
+                </div>
+                <div class="code-view">
+                    <span class="label">Example config</span>
+                    <pre><code>$('#lambo-link').magnify();</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo">
+            <h2>Custom lens size</h2>
+            <p>This demo uses a larger lens. The stage size is adjusted proportionally.</p>
+            <div class="demo-layout">
+                <div class="demo-preview">
+                    <a href="images/lambo.jpg" id="lambo-left-link">
+                        <img src="images/lambo-sm.jpg" alt="Lamborghini thumbnail">
+                    </a>
+                </div>
+                <div class="code-view">
+                    <span class="label">Example config</span>
+                    <pre><code>$('#lambo-left-link').magnify({
+    lensWidth: 140,
+    lensHeight: 140
+});</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo">
+            <h2>Toggle on click</h2>
+            <p>This demo uses click events for showing and hiding the zoom view. The status text updates when the zoom view is shown or hidden.</p>
+            <div class="demo-layout">
+                <div class="demo-preview">
+                    <a href="images/lambo.jpg" id="lambo-click-link">
+                        <img src="images/lambo-sm.jpg" alt="Lamborghini thumbnail">
+                    </a>
+                    <div id="click-status" class="status">Click the image to toggle zoom.</div>
+                </div>
+                <div class="code-view">
+                    <span class="label">Example config</span>
+                    <pre><code>$('#lambo-click-link').magnify({
+    showEvent: 'click',
+    hideEvent: 'click',
+    preload: false,
+    onBeforeShow: function() {
+        $('#click-status').text('Showing zoom view...');
+    },
+    onAfterHide: function() {
+        $('#click-status').text('Click the image to toggle zoom.');
+    }
+});</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo">
+            <h2>Custom styling and callbacks</h2>
+            <p>This demo applies custom lens and stage styling and reports lifecycle callbacks.</p>
+            <div class="demo-layout">
+                <div class="demo-preview">
+                    <a href="images/lambo.jpg" id="lambo-style-link">
+                        <img src="images/lambo-sm.jpg" alt="Lamborghini thumbnail">
+                    </a>
+                    <div id="style-status" class="status">Ready.</div>
+                </div>
+                <div class="code-view">
+                    <span class="label">Example config</span>
+                    <pre><code>$('#lambo-style-link').magnify({
+    lensWidth: 120,
+    lensHeight: 120,
+    lensCss: {
+        border: '2px solid #ef4444'
+    },
+    stageCss: {
+        border: '2px solid #2563eb'
+    },
+    onBeforeShow: function() {
+        $('#style-status').text('Showing zoom view...');
+    },
+    onAfterShow: function() {
+        $('#style-status').text('Zoom view is active.');
+    },
+    onBeforeHide: function() {
+        $('#style-status').text('Hiding zoom view...');
+    },
+    onAfterHide: function() {
+        $('#style-status').text('Ready.');
+    }
+});</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $('#lambo-link').magnify();
+
+                $('#lambo-left-link').magnify({
+                    lensWidth: 140,
+                    lensHeight: 140
+                });
+
+                $('#lambo-click-link').magnify({
+                    showEvent: 'click',
+                    hideEvent: 'click',
+                    preload: false,
+                    onBeforeShow: function() {
+                        $('#click-status').text('Showing zoom view...');
+                    },
+                    onAfterHide: function() {
+                        $('#click-status').text('Click the image to toggle zoom.');
+                    }
+                });
+
+                $('#lambo-style-link').magnify({
+                    lensWidth: 120,
+                    lensHeight: 120,
+                    lensCss: {
+                        border: '2px solid #ef4444',
+                        backgroundColor: 'rgba(255,255,255,0.7)'
+                    },
+                    stageCss: {
+                        border: '2px solid #2563eb',
+                        backgroundColor: '#f8fafc',
+                        boxShadow: '0 12px 28px rgba(37, 99, 235, 0.16)'
+                    },
+                    onBeforeShow: function() {
+                        $('#style-status').text('Showing zoom view...');
+                    },
+                    onAfterShow: function() {
+                        $('#style-status').text('Zoom view is active.');
+                    },
+                    onBeforeHide: function() {
+                        $('#style-status').text('Hiding zoom view...');
+                    },
+                    onAfterHide: function() {
+                        $('#style-status').text('Ready.');
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

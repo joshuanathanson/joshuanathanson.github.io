@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>jQuery ClockPick Demos</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="scripts/timepicker/jquery.clockpick.1.2.9.js"></script>
+        <link rel="stylesheet" href="styles/demo-page.css">
+        <link rel="stylesheet" href="scripts/timepicker/jquery.clockpick.1.2.9.css">
+    </head>
+    <body>
+        <div class="page-wrapper">
+            <a href="index.html" class="nav-link">&larr; Back to index</a>
+        </div>
+        <div class="page-wrapper">
+            <h1>jQuery ClockPick Demo</h1>
+            <p class="intro">
+                This page documents the configuration options exposed by the plugin and demonstrates several ways to tailor the timepicker experience.
+            </p>
+
+            <table class="options-table">
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>starthour</td><td>int</td><td><code>8</code></td><td>Starting hour for the picker range.</td></tr>
+                    <tr><td>endhour</td><td>int</td><td><code>18</code></td><td>Ending hour for the picker range.</td></tr>
+                    <tr><td>showminutes</td><td>bool</td><td><code>true</code></td><td>Shows the minute picker when enabled.</td></tr>
+                    <tr><td>minutedivisions</td><td>int</td><td><code>4</code></td><td>Number of minute divisions, such as 4 for quarter-hours.</td></tr>
+                    <tr><td>military</td><td>bool</td><td><code>false</code></td><td>Uses 24-hour time formatting when enabled.</td></tr>
+                    <tr><td>event</td><td>string</td><td><code>click</code></td><td>Event used to trigger the picker.</td></tr>
+                    <tr><td>layout</td><td>string</td><td><code>vertical</code></td><td>Sets the picker layout to vertical or horizontal.</td></tr>
+                    <tr><td>valuefield</td><td>string</td><td><code>null</code></td><td>Targets a separate input field to receive the selected value.</td></tr>
+                    <tr><td>hoursopacity</td><td>float</td><td><code>1</code></td><td>Opacity for the hours container.</td></tr>
+                    <tr><td>minutesopacity</td><td>float</td><td><code>1</code></td><td>Opacity for the minutes container.</td></tr>
+                </tbody>
+            </table>
+
+            <div class="demo">
+                <h2>Default behavior</h2>
+                <p>Click the field to open the picker using the plugin defaults.</p>
+                <div class="demo-layout">
+                    <div class="demo-preview">
+                        <div class="demo-form">
+                            <input type="text" class="demo-input" id="default-time" placeholder="Pick a time">
+                            <span class="demo-help">Uses the default layout and range.</span>
+                        </div>
+                    </div>
+                    <div class="code-view">
+                        <span class="label">Example config</span>
+                        <pre><code>$('#default-time').clockpick();</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo">
+                <h2>Custom hours and minute divisions</h2>
+                <p>This demo narrows the range and shows quarter-hour increments.</p>
+                <div class="demo-layout">
+                    <div class="demo-preview">
+                        <div class="demo-form">
+                            <input type="text" class="demo-input" id="range-time" placeholder="Select a time">
+                            <span class="demo-help">Open from 9:00 to 17:00.</span>
+                        </div>
+                    </div>
+                    <div class="code-view">
+                        <span class="label">Example config</span>
+                        <pre><code>$('#range-time').clockpick({
+    starthour: 9,
+    endhour: 17,
+    minutedivisions: 6
+});</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo">
+                <h2>Military and horizontal layout</h2>
+                <p>This demo uses a horizontal layout and a 24-hour display.</p>
+                <div class="demo-layout">
+                    <div class="demo-preview">
+                        <div class="demo-form">
+                            <input type="text" class="demo-input" id="military-time" placeholder="Select a time">
+                            <span class="demo-help">Open on focus with 24-hour formatting.</span>
+                        </div>
+                    </div>
+                    <div class="code-view">
+                        <span class="label">Example config</span>
+                        <pre><code>$('#military-time').clockpick({
+    military: true,
+    event: 'focus',
+    layout: 'horizontal'
+});</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo">
+                <h2>Target a separate field</h2>
+                <p>This demo writes the selected value into another input and updates a status message.</p>
+                <div class="demo-layout">
+                    <div class="demo-preview">
+                        <div class="demo-form">
+                            <input type="text" class="demo-input" id="callback-field" placeholder="Click to pick">
+                            <input type="text" class="demo-input" name="callback-output" placeholder="Value will appear here">
+                        </div>
+                        <div id="callback-status" class="status">Pick a time to populate the field.</div>
+                    </div>
+                    <div class="code-view">
+                        <span class="label">Example config</span>
+                        <pre><code>$('#callback-field').clockpick({
+    valuefield: 'callback-output'
+}, function(value) {
+    $('#callback-status').text('Selected: ' + value);
+});</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $('#default-time').clockpick();
+
+                $('#range-time').clockpick({
+                    starthour: 9,
+                    endhour: 17,
+                    minutedivisions: 6
+                });
+
+                $('#military-time').clockpick({
+                    military: true,
+                    event: 'focus',
+                    layout: 'horizontal'
+                });
+
+                $('#callback-field').clockpick({
+                    valuefield: 'callback-output'
+                }, function(value) {
+                    $('#callback-status').text('Selected: ' + value);
+                });
+            });
+        </script>
+    </body>
+</html>

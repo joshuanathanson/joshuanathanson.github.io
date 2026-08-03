@@ -1,17 +1,87 @@
 <html>
     <head>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="scripts/magnify/jquery.magnify.js"></script>
+        <style>
+            body {
+                margin: 0;
+                padding: 48px 20px;
+                font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                background: #f8fafc;
+                color: #0f172a;
+            }
+
+            h1 {
+                max-width: 900px;
+                margin: 0 auto 24px;
+                font-size: 2.25rem;
+                font-weight: 700;
+                color: #0f172a;
+            }
+
+            section {
+                display: flex;
+                align-items: flex-start;
+                gap: 24px;
+                max-width: 900px;
+                margin: 0 auto 20px;
+                padding: 24px 28px;
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-radius: 20px;
+                transition: border-color 0.2s ease, background-color 0.2s ease;
+            }
+
+            section:hover {
+                background: #f8fafc;
+                border-color: #cbd5e1;
+            }
+
+            section h2 {
+                flex: 0 0 180px;
+                margin: 0;
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: #0f172a;
+            }
+
+            section h2 a {
+                color: inherit;
+                text-decoration: none;
+                border-bottom: 1px solid transparent;
+                transition: border-color 0.2s ease;
+            }
+
+            section h2 a:hover {
+                border-color: #93c5fd;
+            }
+
+            section p {
+                flex: 1;
+                margin: 0;
+                line-height: 1.75;
+                color: #475569;
+            }
+
+            @media (max-width: 700px) {
+                section {
+                    flex-direction: column;
+                    gap: 12px;
+                }
+
+                section h2 {
+                    flex-basis: auto;
+                }
+            }
+        </style>
     </head>
     <body>
-        <h1>Hello, World!</h1>
-        <a href="images/lambo.jpg" id="lambo-link">
-            <img src="images/lambo-sm.jpg" id="lambo-sm" />
-        </a>
-        <script>
-            $(document).ready(function() {
-                $('#lambo-link').magnify();
-            });
-        </script>
+        <h1>Josh Nathanson: Portfolio</h1>
+        <section>
+            <h2><a href="magnify.html">Magnify</a></h2>
+            <p>A simple image magnification plugin for jQuery. Bind a link and thumbnail image for rollover magnification effect. Configurable options for lens size, loading behavior, plus before/after loading hooks.</p>
+        </section>
+        <section>
+            <h2><a href="timepicker.html">Timepicker</a></h2>
+            <p>A simple time picker plugin for jQuery. Bind an input field to select a time. Features keyboard navigation, minutes toggle, configurable minute divisions.</p>
+        </section>
     </body>
 </html>
